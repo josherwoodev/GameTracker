@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: tracker
+
+  datasource:
+    url: jdbc:postgresql://localhost:5411/tracker
+    driver-class-name: org.postgresql.Driver
+    username: tracker_dev
+    password: secure-p@sswords-R-long
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
