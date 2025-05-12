@@ -19,18 +19,11 @@ public class Game {
     private String name;
     @Enumerated(EnumType.STRING)
     private TYPES type;
-    private Float rating;
+    private Float rating, hrsPlayed;
+    private Integer timesPlayed, timesWon;
     @OneToOne
     @JoinColumn(name = "player_range_id")
     private PlayerRange playerRange;
-
-    public PlayerRange getPlayerRange() {
-        return playerRange;
-    }
-
-    public void setPlayerRange(PlayerRange playerRange) {
-        this.playerRange = playerRange;
-    }
 
     public enum TYPES {
         BOARD, CARD, MOBILE, VIDEO
