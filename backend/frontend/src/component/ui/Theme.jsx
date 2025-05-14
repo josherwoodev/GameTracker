@@ -1,7 +1,17 @@
 import {createTheme} from "@mui/material";
 
 export const Theme = createTheme({
+    components: {
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: "#334039ff"
+                }
+            }
+        }
+    },
     palette: {
+        mode: "dark",
         primary: {
             main: "#adc"
         },
@@ -17,11 +27,14 @@ export const Theme = createTheme({
         info: {
             main: "#0eb"
         },
+        modalOpenerBtn: {
+            main: "#ccd"
+        },
         success: {
             main: "#b4d455ff",
             light: "#c3dc77ff",
             dark: "#793",
-            contrastText: "#0001"
+            contrastText: "#0009"
         },
     }
 });
