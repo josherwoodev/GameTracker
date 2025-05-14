@@ -4,6 +4,7 @@ import {Container, Grid, useMediaQuery, useTheme} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import ModalOpener from "./component/ModalOpener.jsx";
 import GameModal from "./component/GameModal.jsx";
+import NavBar from "./component/NavBar.jsx";
 
 export default function Layout() {
     const STYLE = {
@@ -14,17 +15,8 @@ export default function Layout() {
 
     return (<ThemeProvider theme={Theme}>
         <div style={{width: '100vw', height: '100vh'}}>
+            <NavBar/>
             <Container maxWidth="lg">
-                <Grid container spacing={2}>
-                    <Grid size='grow'></Grid>
-                    <Grid size={2}>
-                        <ModalOpener textOptions={{rootBtn: "Add New Game", title: "Add New Game", desc: "Modal Description"}}><div>New Game Text</div></ModalOpener>
-                    </Grid>
-                    <Grid size={2}>
-                        <ModalOpener textOptions={{rootBtn: "ModalBtn", title: "Modal Title", desc: "Modal Description"}}><div>Modal TEST</div></ModalOpener>
-                    </Grid>
-                    <Grid size='grow'></Grid>
-                </Grid>
             </Container>
             <Container maxWidth="xl" sx={STYLE}>
                 <Outlet/>
