@@ -1,19 +1,19 @@
 import axios from "axios";
 
 export async function fetchGames() {
-    return await axios.get('http://localhost:8080/api/games');
+    return await axios.get('http://localhost:8080/api/games').then(r => r.data);
 }
 
 export async function fetchGame(id) {
-    return await axios.get(`http://localhost:8080/api/game/${id}`);
+    return await axios.get(`http://localhost:8080/api/game/${id}`).then(r => r.data);
 }
 
 export async function createGame(game) {
-    return await axios.post('http://localhost:8080/api/game', game);
+    return await axios.post('http://localhost:8080/api/game', game).then(r => r.data);
 }
 
 export async function updateGame(game) {
-    return await axios.patch(`http://localhost:8080/api/game/${game.id}`, game);
+    return await axios.patch(`http://localhost:8080/api/game/${game.id}`, game).then(r => r.data);
 }
 
 export async function deleteGame(id) {
@@ -24,8 +24,8 @@ export function toRegularCase(text) {
     return text.slice(0, 1).toUpperCase() + text.slice(1).toLowerCase();
 }
 
-export function titleToRegularCase(name) {
-    return name.split(" ").forEach(word => toRegularCase(word)).join(" ")
+export function titleToRegularCase(title) {
+    return title.split(/[ ,-]/).map(word => toRegularCase(word)).join(' ');
 }
 
 export const gameDescriptionBuilder = {
