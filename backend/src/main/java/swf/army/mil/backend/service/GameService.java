@@ -18,7 +18,7 @@ public class GameService {
     }
 
     public List<Game> getAll() {
-        return gameRepository.findAll();
+        return gameRepository.findAllByIsLive(true);
     }
 
     public Game getById(Long id) {
@@ -32,7 +32,7 @@ public class GameService {
     }
 
     public Game updateGame(Game updated) {
-        var current = gameRepository.findByIdAndIsLiveTrue(updated.getId()).orElseThrow(NoResourceFoundException::new);
+        var current = gameRepository.findByIdAndIsLive(updated.getId(), true).orElseThrow(NoResourceFoundException::new);
         if (updated.getName() != null) current.setName(updated.getName());
         if (updated.getType() != null) current.setType(updated.getType());
         if (updated.getRating() != null) current.setRating(updated.getRating());
@@ -42,7 +42,7 @@ public class GameService {
     }
 
     public void deleteGame(Long id) {
-        var target = gameRepository.findByIdAndIsLiveTrue(id).orElseThrow(NoResourceFoundException::new);
+        var target = gameRepository.findByIdAndIsLive(id, true).orElseThrow(NoResourceFoundException::new);
         target.setLive(false);
         gameRepository.save(target);
     }

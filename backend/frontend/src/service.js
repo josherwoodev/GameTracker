@@ -1,23 +1,24 @@
 import axios from "axios";
 
 export async function fetchGames() {
-    return await axios.get('http://localhost:8080/api/games').then(r => r.data);
+    return await axios.get('/api/games').then(r => r.data);
 }
 
 export async function fetchGame(id) {
-    return await axios.get(`http://localhost:8080/api/game/${id}`).then(r => r.data);
+    return await axios.get(`/api/game/${id}`).then(r => r.data);
 }
 
 export async function createGame(game) {
-    return await axios.post('http://localhost:8080/api/game', game).then(r => r.data);
+    return await axios.post('/api/game', game).then(r => r.data);
 }
 
 export async function updateGame(game) {
-    return await axios.patch(`http://localhost:8080/api/game/${game.id}`, game).then(r => r.data);
+    return await axios.patch(`/api/game/${game.id}`, game).then(r => r.data);
 }
 
 export async function deleteGame(id) {
-    return await axios.delete(`http://localhost:8080/api/game/${id}`);
+    console.log()
+    return await axios.delete(`/api/game/${id}`);
 }
 
 export function toRegularCase(text) {

@@ -2,10 +2,11 @@ import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogCont
 import {useState} from "react";
 
 export default function ModalOpener(props) {
-    const {textOptions, openHandler, submitHandler, children} = {textOptions: {}, ...props};
+    const {textOptions, openHandler, submitHandler, children, color} = {textOptions: {}, ...props};
     const [open, setOpen] = useState(false);
 
     function openModal() {
+        if (openHandler) openHandler();
         setOpen(true);
     }
 
@@ -13,18 +14,19 @@ export default function ModalOpener(props) {
         setOpen(false);
     }
 
-    function callSubmit(game) {
-        submitHandler(game);
+    function callSubmit(input) {
+        submitHandler(input);
+        setOpen(false);
     }
 
     return (<div>
-        {textOptions.tooltip ? <Tooltip title={textOptions.tooltip} arrow placement="bottom"><Button color="modalOpenerBtn" variant="outlined" onClick={openHandler || openModal}>{textOptions.rootBtn}</Button></Tooltip>
-            : <Button color="modalOpenerBtn" variant="outlined" onClick={openHandler || openModal}>{textOptions.rootBtn}</Button>}
+        {textOptions.tooltip ? <Tooltip title={textOptions.tooltip} arrow placement="bottom"><Button color={color || "modalOpenerBtn"} variant="outlined" onClick={openModal}>{textOptions.rootBtn}</Button></Tooltip>
+            : <Button color={color || "modalOpenerBtn"} variant="outlined" onClick={openModal}>{textOptions.rootBtn}</Button>}
 
         <Dialog open={open} onClose={closeModal} maxWidth="md" fullWidth closeAfterTransition={false}>
             <DialogTitle>{textOptions.title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>{textOptions.desc}</DialogContentText>
+                {textOptions.desc ? <DialogContentText>{textOptions.desc}</DialogContentText> : null}
                 {children}
             </DialogContent>
             <DialogActions>

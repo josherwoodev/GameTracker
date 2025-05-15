@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 public class GameController {
 
     private final GameService gameService;
