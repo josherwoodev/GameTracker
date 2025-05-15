@@ -1,4 +1,4 @@
-import {FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, Slider, Stack, TextField, Typography} from "@mui/material";
 import {useState} from "react";
 
 export default function GameForm(props) {
@@ -7,12 +7,12 @@ export default function GameForm(props) {
         id: null,
         name: "",
         type: '',
-        rating: 0.0,
+        rating: 1.0,
         playerRange: {
             id: null,
-            minPlayers: 0,
-            maxPlayers: 0,
-            multiplayer: false,
+            minPlayers: 1,
+            maxPlayers: 1,
+            multiplayer: true,
         }
     };
     const [form, setForm] = useState({...game, ...empty});
@@ -21,8 +21,22 @@ export default function GameForm(props) {
         setForm({...form, [e.target.name]: e.target.value});
     }
 
+    function handleRangeChange(e) {
+        setForm({...form, playerRange: {...form.playerRange, [e.target.name]: e.target.value}});
+    }
+
     return (<Grid container spacing={2}>
         <Grid size={{xs: 12, sm: 6, md: 3}}>
+            <TextField id="game-name-input" name="name" label="Name" value={form.name} onChange={handleChange} />
+        </Grid>
+        <Grid size={{xs: 12, sm: 6, md: 3}}>
+            <FormControl>
+                <FormLabel>Game Is:</FormLabel>
+                <RadioGroup value={form.playerRange.multiplayer} name="multiplayer" defaultValue={true} onChange={handleRangeChange}>
+                    <FormControlLabel control={<Radio/>} label="Single Player" value={false} />
+                    <FormControlLabel control={<Radio/>} label="Multiplayer" value={true} />
+                </RadioGroup>
+            </FormControl>
         </Grid>
         <Grid size={{xs: 12, sm: 6, md: 3}}>
             <FormControl color="primary" fullWidth>
@@ -34,6 +48,18 @@ export default function GameForm(props) {
                     <MenuItem value="VIDEO">Video Game</MenuItem>
                 </Select>
             </FormControl>
+        </Grid>
+        <Grid size={{xs: 12, sm: 6, md: 3}}>
+            <Stack spacing={2} direction="row" sx={{alignItems: "center", mb: 1}}>
+                <Typography>Rating:</Typography>
+            </Stack>
+            <Slider name="rating" value={form.rating} step={.1} min={1} max={5} valueLabelDisplay="on" track={false} onChange={handleChange} sx={{mt: 4}} />
+        </Grid>
+        <Grid size={{xs: 12, sm: 6, md: 3}}>
+            <TextField type="number" id="game-player-min-input" name="minPlayers" label="Minimum Players" value={form.playerRange.minPlayers} onChange={handleRangeChange} disabled={form.playerRange.multiplayer === "false"} />
+        </Grid>
+        <Grid size={{xs: 12, sm: 6, md: 3}}>
+            <TextField type="number" id="game-player-max-input" name="maxPlayers" label="Maximum Players" value={form.playerRange.maxPlayers} onChange={handleRangeChange} disabled={form.playerRange.multiplayer === "false"} />
         </Grid>
     </Grid>);
 }

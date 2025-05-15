@@ -1,4 +1,4 @@
-import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+import {Card, CardActions, CardContent, Typography} from "@mui/material";
 import {deleteGame, gameDescriptionBuilder, titleToRegularCase} from "../service.js";
 import ModalOpener from "./ModalOpener.jsx";
 import GameForm from "./GameForm.jsx";
@@ -28,10 +28,8 @@ export default function GameCard(props) {
             {gameDescriptionBuilder.build(game).split("\n").map((line, index) => (<div key={index}>{line}</div>))}
         </CardContent>
         <CardActions sx={{flexDirection: 'row', justifyContent: 'end'}}>
-            {/*<Button color="info" variant="outlined" sx={{mx: 3}}>Edit</Button>*/}
             <ModalOpener textOptions={editModalTexts} color="info" submitHandler={sendPatch}><GameForm/></ModalOpener>
             <ModalOpener textOptions={delModalTexts} color="error" submitHandler={sendDelete}/>
-            {/*<Button color="error" variant="outlined" sx={{mx: 3}}>Delete</Button>*/}
         </CardActions>
     </Card>);
 }

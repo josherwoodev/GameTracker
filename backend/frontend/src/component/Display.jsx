@@ -14,7 +14,7 @@ export default function Display() {
         refreshList();
     }, []);
 
-    return (<Grid container spacing={3} sx={{justifyContent: 'space-around'}}>
+    return (<Grid container spacing={3} sx={{justifyContent: 'space-around', py: 3}}>
         {games?.map((game, index) => (<Grid key={index} size={{xs: 12, sm: 6, md: 4, lg: 3}}>
             <GameCard game={game} refreshList={refreshList}/></Grid>))}
     </Grid>);
