@@ -15,7 +15,7 @@ export default function GameForm(props) {
             multiplayer: true,
         }
     };
-    const [form, setForm] = useState({...game, ...empty});
+    const [form, setForm] = useState({...empty, ...game});
 
     function handleChange(e) {
         setForm({...form, [e.target.name]: e.target.value});

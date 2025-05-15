@@ -28,7 +28,7 @@ export default function GameCard(props) {
             {gameDescriptionBuilder.build(game).split("\n").map((line, index) => (<div key={index}>{line}</div>))}
         </CardContent>
         <CardActions sx={{flexDirection: 'row', justifyContent: 'end'}}>
-            <ModalOpener textOptions={editModalTexts} color="info" submitHandler={sendPatch}><GameForm/></ModalOpener>
+            <ModalOpener textOptions={editModalTexts} color="info" submitHandler={sendPatch}><GameForm game={game}/></ModalOpener>
             <ModalOpener textOptions={delModalTexts} color="error" submitHandler={sendDelete}/>
         </CardActions>
     </Card>);
