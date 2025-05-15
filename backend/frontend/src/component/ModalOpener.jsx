@@ -2,7 +2,7 @@ import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogCont
 import {useState} from "react";
 
 export default function ModalOpener(props) {
-    const {textOptions, openHandler, children} = {textOptions: {}, ...props};
+    const {textOptions, openHandler, submitHandler, children} = {textOptions: {}, ...props};
     const [open, setOpen] = useState(false);
 
     function openModal() {
@@ -11,6 +11,10 @@ export default function ModalOpener(props) {
 
     function closeModal() {
         setOpen(false);
+    }
+
+    function callSubmit(game) {
+        submitHandler(game);
     }
 
     return (<div>
@@ -24,8 +28,8 @@ export default function ModalOpener(props) {
                 {children}
             </DialogContent>
             <DialogActions>
-                <Button onClick={closeModal} variant="contained" color="success">Cancel</Button>
-                <Button onClick={closeModal} variant="contained" color="error">Cancel</Button>
+                {submitHandler ? <Button variant="contained" color="success" onClick={callSubmit}>Submit</Button> : null}
+                <Button variant="contained" color="error" onClick={closeModal}>Cancel</Button>
             </DialogActions>
         </Dialog>
     </div>);
